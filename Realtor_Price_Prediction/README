@@ -1,0 +1,39 @@
+# Realtor Price Prediction
+
+This project uses a dataset of real estate listings to predict house prices based on various features such as the number of bedrooms, bathrooms, lot size, and city. The model utilizes a linear regression algorithm with one-hot encoding for the categorical feature (city).
+
+## Project Structure
+
+- `realtor_price_prediction.py`: The Python script containing the code for data preprocessing, model training, and evaluation.
+- `realtor-data-sample.csv`: The dataset used for the project.
+
+## Dataset
+
+The dataset (`realtor-data-sample.csv`) includes the following columns:
+- `bed`: Number of bedrooms.
+- `bath`: Number of bathrooms.
+- `acre_lot`: Size of the lot in acres.
+- `city`: City where the house is located.
+- `price`: The target variable representing the price of the house.
+
+## Model Pipeline
+
+1. **Data Preprocessing**: Handles missing values and applies one-hot encoding to the `city` column.
+2. **Model Training**: Uses Linear Regression to fit the model to the training data.
+3. **Model Evaluation**: Evaluates the model using Mean Squared Error (MSE) and R² score.
+
+## Results
+
+- **Mean Squared Error**: The average squared difference between the predicted and actual values.
+- **R² Score**: The proportion of variance in the dependent variable that can be predicted from the independent variables.
+
+## Feature Coefficients
+
+The project also extracts and displays the coefficients of the features after one-hot encoding. This helps in understanding the influence of each feature on the house prices.
+
+## How to Run
+
+1. Make sure you have Python installed along with the necessary libraries: `pandas`, `scikit-learn`, `numpy`, and `matplotlib`.
+2. Run the script using the following command:
+   
+   python realtor_price_prediction.py
