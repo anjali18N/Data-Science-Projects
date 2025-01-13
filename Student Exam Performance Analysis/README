@@ -1,0 +1,50 @@
+This project involves analyzing a dataset of student exam performance and performing statistical tests to evaluate the impact of test preparation courses on students' scores. The analysis includes the following steps:
+
+Data Overview
+The dataset, ExamPerformance.csv, contains exam scores for students across different subjects and their participation in a test preparation course. The main subjects analyzed are math, reading, and writing. The dataset also includes test preparation information (whether the student completed the course or not).
+
+Steps and Statistical Analysis
+
+Wilcoxon Signed-Rank Test (One Sample Test):
+
+Used to compare the math scores of students to a hypothetical value (70).
+This test helps determine if the median of the math scores significantly differs from 70.
+
+Wilcoxon Signed-Rank Test (Paired Samples Test):
+
+Analyzes the effect of test preparation on reading scores by comparing the reading scores before and after the test preparation course for the same students.
+This test evaluates whether there is a significant change in reading performance due to preparation.
+
+Mann-Whitney U Test (Independent Samples Test):
+
+Compares the writing scores between students who completed the test preparation course and those who did not.
+This test is used to assess whether students who completed the course have higher writing scores than those who did not.
+
+Random Generation of "Before" Test Scores:
+
+To simulate missing data for students who did not complete the test preparation course, random "before" test scores for reading were generated from existing data. This ensures that the dataset contains a complete set of data for analysis.
+
+Files in This Repository
+ExamPerformance.csv: The main dataset that contains student scores and test preparation information.
+student_performance_analysis.py: The Python script that performs the statistical analysis and generates the results.
+
+Requirements
+To run this analysis, you will need the following Python libraries:
+
+pandas
+scipy
+numpy
+
+You can install the required libraries by running:
+
+pip install pandas scipy numpy
+
+Results
+The script performs the following:
+
+One Sample Test Statistic: 1446.0
+One Sample P-Value: 0.0008113086683365729
+Paired Samples Test Statistic: 1854.0
+Paired Samples P-Value: 0.04282265262449347
+Independent Samples Test Statistic: 1694.0
+Independent Samples P-Value: 0.0003654321545549441
