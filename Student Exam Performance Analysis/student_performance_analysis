@@ -1,0 +1,49 @@
+import pandas as pd
+from scipy.stats import wilcoxon
+import numpy as np
+from scipy.stats import mannwhitneyu
+
+# Load the "Student Exam Performance" dataset
+data = pd.read_csv("ExamPerformance.csv")
+
+# Extract math scores
+math_scores = data['math score']
+
+# Perform the Wilcoxon Test for one sample
+statistic, p_value = wilcoxon(math_scores - 70)
+
+# Print the test statistic and p-value
+print("One Sample Test Statistic:", statistic)
+print("One Sample P-Value:", p_value)
+
+# Extract reading scores before and after test preparation
+reading_scores_before = data['reading score_before']
+reading_scores_after = data['reading score']
+
+# Perform the Wilcoxon for paired samples
+PS_statistic, PS_p_value = wilcoxon(reading_scores_before, reading_scores_after)
+
+# Print the test statistic and p-value
+print("Paired Samples Test Statistic:", PS_statistic)
+print("Paired Samples P-Value:", PS_p_value)
+
+# Extract writing scores for two groups (completed vs. not completed test prep)
+writing_scores_completed = data[data['test preparation course'] == 'completed']['writing score']
+writing_scores_not_completed = data[data['test preparation course'] == 'none']['writing score']
+
+# Perform the Mann-Whitney U Test for independent samples
+I_statistic, I_p_value = mannwhitneyu(writing_scores_completed, writing_scores_not_completed)
+
+# Print the test statistic and p-value
+print("Independent Samples Test Statistic:", I_statistic)
+print("Independent Samples P-Value:", I_p_value)
+
+# Filter data for students who didn't complete the test preparation course
+reference_data = data[data['test preparation course'] == 'none']
+
+# Generate random "before" test scores based on students who didn't complete the course
+np.random.seed(42)  # Set a seed for reproducibility
+data['reading score_before'] = np.random.choice(reference_data['reading score'], len(data))
+
+# Now, your dataset includes random "before" and "after" test scores for reading
+data.to_csv("ExamPerformance.csv", index=False)
