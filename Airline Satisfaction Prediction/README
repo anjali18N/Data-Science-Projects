@@ -1,0 +1,33 @@
+# Airline Satisfaction Prediction
+
+This project uses a dataset from Invistico Airline to predict customer satisfaction using logistic regression. It involves data preprocessing, handling missing values, one-hot encoding of categorical variables, and model evaluation using classification metrics.
+
+## Project Structure
+
+- `airline_satisfaction.py`: Python script with code for preprocessing, training, and evaluating the model.
+- `Invistico_Airline.csv`: Dataset used for the project.
+
+## Dataset
+
+The dataset includes the following columns:
+- `Gender`
+- `Customer Type`
+- `Type of Travel`
+- `Class`
+- `satisfaction`: Target variable (satisfied or dissatisfied)
+
+## Model Pipeline
+
+1. **Data Preprocessing**: One-hot encoding for categorical variables, imputation of missing values for both numerical and categorical columns.
+2. **Model Training**: Logistic Regression is used to predict customer satisfaction.
+3. **Model Evaluation**: The model's performance is evaluated using a classification report and a confusion matrix.
+
+## Results
+
+- **Classification Report**: Provides precision, recall, F1-score, and support for each class.
+- **Confusion Matrix**: Shows the number of true positive, true negative, false positive, and false negative predictions.
+
+## Feature Coefficients
+
+The project also extracts and displays the coefficients of the features, sorted by their impact on the target variable.
+

@@ -1,0 +1,49 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.impute import SimpleImputer
+
+# Load your dataset
+df = pd.read_csv('Invistico_Airline.csv')
+
+# One-hot encode categorical variables
+df = pd.get_dummies(df, columns=['Gender', 'Customer Type', 'Type of Travel', 'Class'], drop_first=True)
+
+# Impute missing values
+# For numerical columns
+num_cols = df.select_dtypes(include=['float64', 'int64']).columns
+num_imputer = SimpleImputer(strategy='median')
+df[num_cols] = num_imputer.fit_transform(df[num_cols])
+
+# For categorical columns
+cat_cols = df.select_dtypes(include=['object']).columns
+cat_imputer = SimpleImputer(strategy='most_frequent')
+df[cat_cols] = cat_imputer.fit_transform(df[cat_cols])
+
+# Encode the target variable if it's categorical
+df['satisfaction'] = df['satisfaction'].map({'satisfied': 1, 'dissatisfied': 0})
+
+# Define features and target variable
+X = df.drop('satisfaction', axis=1)
+y = df['satisfaction']
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# Create and train the logistic regression model
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# Make predictions and evaluate the model
+y_pred = model.predict(X_test)
+print(classification_report(y_test, y_pred))
+print(confusion_matrix(y_test, y_pred))
+
+# Getting the model coefficients
+coefficients = pd.DataFrame({"Feature": X.columns, "Coefficient": model.coef_[0]})
+
+# Sorting the coefficients for better understanding
+coefficients = coefficients.sort_values(by="Coefficient", ascending=False)
+
+print(coefficients)
