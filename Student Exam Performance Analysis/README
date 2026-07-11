@@ -40,7 +40,6 @@ You can install the required libraries by running:
 pip install pandas scipy numpy
 
 Results
-The script performs the following:
 
 One Sample Test Statistic: 1446.0
 One Sample P-Value: 0.0008113086683365729
