@@ -1,0 +1,60 @@
+# Re-importing necessary libraries and ensuring all necessary steps are in context for successful execution
+import pandas as pd
+from sklearn.mixture import GaussianMixture
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Re-load the dataset
+file_path = 'NIFTY50_all.csv'
+df = pd.read_csv(file_path)
+
+# Preprocessing steps: Convert the 'Date' column to datetime format
+df['Date'] = pd.to_datetime(df['Date'])
+
+# Sort the data by 'Symbol' and 'Date'
+df = df.sort_values(by=['Symbol', 'Date'])
+
+# Calculate daily returns for each stock
+df['Daily_Return'] = df.groupby('Symbol')['Close'].pct_change()
+
+# Drop the first row of each stock symbol since it will have NaN for the daily return
+df = df.dropna(subset=['Daily_Return'])
+
+# Create a pivot table where each column represents a stock and rows represent the daily returns
+pivot_table = df.pivot(index='Date', columns='Symbol', values='Daily_Return')
+
+# Prepare the data for GMM by using the daily returns (pivoted format)
+returns_data = pivot_table.dropna(axis=1).fillna(0)  # Dropping columns with NaNs and filling any remaining NaNs with 0
+
+# Initialize and fit the Gaussian Mixture Model
+gmm = GaussianMixture(n_components=5, covariance_type='full', random_state=42)
+gmm.fit(returns_data.T)
+
+# Predict the cluster for each stock
+gmm_clusters = gmm.predict(returns_data.T)
+
+# Create a DataFrame to hold the cluster assignments
+gmm_clustered_stocks = pd.DataFrame({
+    'Stock': returns_data.columns,
+    'GMM_Cluster': gmm_clusters
+})
+
+# Sort by cluster for better readability
+gmm_clustered_stocks = gmm_clustered_stocks.sort_values(by='GMM_Cluster').reset_index(drop=True)
+
+# Visualization of the clusters using a heatmap
+plt.figure(figsize=(10, 8))
+sns.heatmap(returns_data.corr(), cmap='coolwarm', annot=False, cbar=True)
+plt.title('Correlation Matrix of Stock Returns')
+plt.show()
+
+# Visualizing the GMM clusters in a bar chart
+plt.figure(figsize=(12, 6))
+gmm_clustered_stocks['GMM_Cluster'].value_counts().sort_index().plot(kind='bar')
+plt.title('Distribution of Stocks Across GMM Clusters')
+plt.xlabel('GMM Cluster')
+plt.ylabel('Number of Stocks')
+plt.show()
+
+# Display the clustered stocks DataFrame
+gmm_clustered_stocks.head()

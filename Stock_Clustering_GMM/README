@@ -1,0 +1,45 @@
+This project uses Gaussian Mixture Models (GMM) to cluster stocks from the NIFTY 50 index based on their daily returns. The dataset includes historical stock data, and the goal is to apply unsupervised machine learning to identify patterns and group stocks that exhibit similar behavior in terms of price movements.
+
+Objective
+The objective of this project is to use GMM to identify clusters of stocks in the NIFTY 50 index that have similar daily return characteristics. The project involves preprocessing stock data, calculating daily returns, and applying GMM clustering to find meaningful stock groupings.
+
+Dataset
+The dataset used in this project is from the NIFTY 50 index, which includes stock prices for 50 companies over a period of time. The key columns in the dataset are:
+
+Date: The date of the stock price.
+Symbol: The stock symbol representing each company.
+Close: The closing price of the stock on that date.
+
+Steps Involved
+
+Data Preprocessing:
+
+The Date column is converted to datetime format for easier manipulation.
+Data is sorted by Symbol and Date to ensure that each stock's historical prices are in chronological order.
+Daily returns are calculated for each stock by computing the percentage change in the Close price.
+
+Gaussian Mixture Model (GMM) Clustering:
+
+The dataset is transformed into a pivot table where each column represents a stock and rows represent daily returns.
+GMM is applied to the daily returns to identify 5 clusters of stocks based on their return patterns.
+The model assigns each stock to a cluster, indicating which group of stocks it belongs to.
+
+Visualization:
+
+A correlation heatmap is created to visualize the relationships between the daily returns of the stocks.
+A bar chart is used to visualize the distribution of stocks across the identified GMM clusters.
+
+Results
+Clustering: Stocks are grouped into 5 clusters based on their daily returns.
+Correlation Heatmap: Visualizes the correlation between different stocks, helping to identify which stocks move similarly.
+Cluster Distribution: Shows how many stocks belong to each of the 5 GMM clusters.
+
+Files in This Repository
+NIFTY50_all.csv: The raw dataset containing historical stock prices for the NIFTY 50 companies.
+stock_clustering_gmm.py: The Python script implementing the data preprocessing, GMM clustering, and visualization steps.
+README.md: The project documentation.
+
+Requirements
+To run the Python script, install the following libraries:
+
+pip install pandas scikit-learn matplotlib seaborn
