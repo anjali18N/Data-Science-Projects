@@ -12,9 +12,11 @@ This project uses the Invistico Airline dataset (~130k passenger survey response
 ```
 01_data_cleaning_EDA.ipynb          - airline_satisfaction_clean.csv
 02_feature_engineering.ipynb        - engineered feature set
-03_model_training_evaluation.ipynb  - trained_model.pkl
+03_model_training_evaluation.ipynb  - trained_model.pkl 
 04_interpretation.ipynb             - permutation importance + recommendations
 ```
+**Note:** models/trained_model.pkl is not included in this repository due to its size (over GitHub's 100MB limit). Run 03_model_training_evaluation.ipynb to
+regenerate it locally, the random seed is fixed, so results can be reproduced.
 
 ## Key Findings
 
