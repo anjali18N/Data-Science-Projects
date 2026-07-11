@@ -15,8 +15,6 @@ This project uses the Invistico Airline dataset (~130k passenger survey response
 03_model_training_evaluation.ipynb  - trained_model.pkl 
 04_interpretation.ipynb             - permutation importance + recommendations
 ```
-**Note:** models/trained_model.pkl is not included in this repository due to its size (over GitHub's 100MB limit). Run 03_model_training_evaluation.ipynb to
-regenerate it locally, the random seed is fixed, so results can be reproduced.
 
 ## Key Findings
 
@@ -89,8 +87,6 @@ Airline Satisfaction Prediction/
 │       ├── airline_satisfaction_clean.csv
 │       ├── airline_satisfaction_features.csv
 │       └── airline_satisfaction_features_scaled.csv
-├── models/
-│   └── trained_model.pkl
 ├── images/                       # Charts saved from each notebook
 └── notebooks/
     ├── 01_data_cleaning_eda.ipynb
@@ -98,7 +94,8 @@ Airline Satisfaction Prediction/
     ├── 03_model_training_evaluation.ipynb
     └── 04_interpretation.ipynb
 ```
-
+**Note:** models/trained_model.pkl is not included in this repository due to its size (over GitHub's 100MB limit). Run 03_model_training_evaluation.ipynb to
+regenerate it locally, the random seed is fixed, so results can be reproduced.
 
 ## Limitations
 
